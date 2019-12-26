@@ -3,13 +3,21 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: WALTER`s BLOG
+subtitle: '双手握住简单的快乐'
+description: '可乐+薯片'
 keywords:
-author: John Doe
-language: en
-timezone: ''
+  - blog
+  - stkevintan
+  - IT
+  - Web Front End
+  - Kevin Tan
+  - kevinsfork
+author: Walter
+avatar: /images/avatar.jpg
+favicon: /images/favicon.ico
+language: zh-CN
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -90,10 +98,56 @@ include:
 exclude:
 ignore:
 
+search:
+  path: search.xml
+  field: post
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: ayer
+theme: material-flow
+
+# Generator json content
+jsonContent:
+  meta: false
+  keywords: false
+  pages:
+    title: true
+    slug: false
+    date: false
+    updated: false
+    comments: false
+    path: false
+    link: false
+    permalink: true
+    excerpt: false
+    keywords: false
+    text: true
+    raw: false
+    content: false
+  posts:
+    title: true
+    slug: false
+    date: false
+    updated: false
+    comments: false
+    path: false
+    link: false
+    permalink: true
+    excerpt: false
+    keywords: false
+    text: true
+    raw: false
+    content: false
+    categories: false
+    tags: false
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
