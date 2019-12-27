@@ -14,7 +14,7 @@ date: 2019-12-26 20:33:09
 
 Exception和Error都继承自Throwable对象，在Java中只有Throwable对象可以被抛出(throw)和捕捉(catch)，它是异常处理机制的实现基础。
 
-![Throwable类图](/images/java-error.png)
+![Throwable类图](/images/posts/java-error.png)
 
 #### Error
 
