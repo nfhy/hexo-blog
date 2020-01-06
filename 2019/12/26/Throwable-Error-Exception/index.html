@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Archives: 2019/12 | WALTER`s BLOG</title>
+  <title>java Throwable/Error/Exception | WALTER`s BLOG</title>
   <meta name="description" content="可乐+薯片" />
   <meta name="keywords" content="blog,stkevintan,IT,Web Front End,Kevin Tan,kevinsfork" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,13 +12,16 @@
   <link rel="shortcut icon" href="/images/favicon.ico">
   <link rel="alternate" href="/atom.xml" title="WALTER`s BLOG">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="可乐+薯片">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WALTER&#96;s BLOG">
-<meta property="og:url" content="http://yoursite.com/archives/2019/12/index.html">
+  <meta name="description" content="Exception 与 Error总结：  Error：影响jvm运行的问题，程序不需要捕获，也无法解决 Exception: 程序可以捕获和处理的异常 UncheckedException: 运行时异常，可以通过编码避免的异常，如空指针&#x2F;数组越界 CheckedException: 程序必须捕获，并提供异常处理逻辑，如IO异常&#x2F;网络连接异常 不要把异常用于流程控制，会导致代码不易维护，同时影响性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java Throwable&#x2F;Error&#x2F;Exception">
+<meta property="og:url" content="http://yoursite.com/2019/12/26/Throwable-Error-Exception/index.html">
 <meta property="og:site_name" content="WALTER&#96;s BLOG">
-<meta property="og:description" content="可乐+薯片">
+<meta property="og:description" content="Exception 与 Error总结：  Error：影响jvm运行的问题，程序不需要捕获，也无法解决 Exception: 程序可以捕获和处理的异常 UncheckedException: 运行时异常，可以通过编码避免的异常，如空指针&#x2F;数组越界 CheckedException: 程序必须捕获，并提供异常处理逻辑，如IO异常&#x2F;网络连接异常 不要把异常用于流程控制，会导致代码不易维护，同时影响性">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/posts/java-error.png">
+<meta property="article:published_time" content="2019-12-26T12:33:09.000Z">
+<meta property="article:modified_time" content="2020-01-06T04:10:26.815Z">
 <meta property="article:author" content="Walter">
 <meta property="article:tag" content="blog">
 <meta property="article:tag" content="stkevintan">
@@ -27,6 +30,7 @@
 <meta property="article:tag" content="Kevin Tan">
 <meta property="article:tag" content="kevinsfork">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/posts/java-error.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -150,31 +154,26 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        
+        <article id="post-Throwable-Error-Exception"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2019/12/26/Throwable-Error-Exception/">
+    	java Throwable/Error/Exception
+    </a>
+  </h2>
+	<time>
+	  12月 26, 2019
+	</time>
 	
-  <script>
-    window.subData= { title:'Year : 2019.12'}
-  </script>
-
-<section class="post-list">
+	</section>
 	
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2019/12/26/Throwable-Error-Exception/">
-        java Throwable/Error/Exception
-      </a>
-    </h2>
-    
-    <time>
-      12月 26, 2019
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <h2 id="Exception-与-Error"><a href="#Exception-与-Error" class="headerlink" title="Exception 与 Error"></a>Exception 与 Error</h2><p>总结：</p>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Exception-与-Error"><span class="toc-number">1.</span> <span class="toc-text">Exception 与 Error</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Error"><span class="toc-number">1.0.1.</span> <span class="toc-text">Error</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exception"><span class="toc-number">1.0.2.</span> <span class="toc-text">Exception</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#UncheckedException"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">UncheckedException</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CheckedException"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">CheckedException</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#异常处理建议"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">异常处理建议</span></a></li></ol></li></ol></li></ol></li></ol></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<h2 id="Exception-与-Error"><a href="#Exception-与-Error" class="headerlink" title="Exception 与 Error"></a>Exception 与 Error</h2><p>总结：</p>
 <ol>
 <li>Error：影响jvm运行的问题，程序不需要捕获，也无法解决</li>
 <li>Exception: 程序可以捕获和处理的异常</li>
@@ -195,17 +194,28 @@
 <h5 id="CheckedException"><a href="#CheckedException" class="headerlink" title="CheckedException"></a>CheckedException</h5><p>CheckedException是必须在程序中显式的捕捉和处理的一类异常。此类异常一般不是可以通过编码规避的，程序必须负责提供异常处理逻辑。如IOException/ConnectionException等外部环境导致的异常。</p>
 <h5 id="异常处理建议"><a href="#异常处理建议" class="headerlink" title="异常处理建议"></a>异常处理建议</h5><p>第一，不要用抛出异常来控制代码流程，由于java实例化一个异常时需要对栈进行快照，这是一个相对比较重的操作。<br>第二，不要用try块包裹一大块代码，尽量哪里抛异常包裹哪里。try块会影响jvm对代码的优化。<br>第三，不要生吞异常，在catch块中把异常忽略掉，不做处理。此类情况往往是基于假设这类异常绝对不会发生。<br>第四，不要捕捉Error，更不要捕捉Throwable，尽量明确捕捉一个特定异常，多个异常多个catch块处理。<br>第五，throw early, catch later原则。有可能抛出异常的代码尽量提早执行。<br>第六，finally块不要处理需要return的对象，否则会影响到try块或catch块中return的对象</p>
 
-
-    
-    
-    
-  </section>
+  	</div>
+	  
+		
+	
+		<div class="art-item-footer">
+				
+				
+					<span class="art-item-right">next：<a href="/2019/01/06/Throwable-Error-Exception%20copy/" rel="next"  title="redis缓存实现">
+						redis缓存实现
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
 </article>
-    </div>
-  
-</section>
-
-
+<script>
+	window.subData = {
+		title: 'java Throwable/Error/Exception',
+		tools: true
+	}
+</script>
 
       </div>
       <aside class='l_side'>

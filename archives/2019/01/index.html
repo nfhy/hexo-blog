@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>WALTER`s BLOG</title>
+  <title>Archives: 2019/1 | WALTER`s BLOG</title>
   <meta name="description" content="可乐+薯片" />
   <meta name="keywords" content="blog,stkevintan,IT,Web Front End,Kevin Tan,kevinsfork" />
   <meta name="HandheldFriendly" content="True" />
@@ -15,7 +15,7 @@
   <meta name="description" content="可乐+薯片">
 <meta property="og:type" content="website">
 <meta property="og:title" content="WALTER&#96;s BLOG">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/archives/2019/01/index.html">
 <meta property="og:site_name" content="WALTER&#96;s BLOG">
 <meta property="og:description" content="可乐+薯片">
 <meta property="og:locale" content="zh_CN">
@@ -151,53 +151,13 @@
     <div class='container clearfix'>
       <div class='l_main'>
         
+	
+  <script>
+    window.subData= { title:'Year : 2019.1'}
+  </script>
+
 <section class="post-list">
 	
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2019/12/26/Throwable-Error-Exception/">
-        java Throwable/Error/Exception
-      </a>
-    </h2>
-    
-    <time>
-      12月 26, 2019
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <h2 id="Exception-与-Error"><a href="#Exception-与-Error" class="headerlink" title="Exception 与 Error"></a>Exception 与 Error</h2><p>总结：</p>
-<ol>
-<li>Error：影响jvm运行的问题，程序不需要捕获，也无法解决</li>
-<li>Exception: 程序可以捕获和处理的异常</li>
-<li>UncheckedException: 运行时异常，可以通过编码避免的异常，如空指针/数组越界</li>
-<li>CheckedException: 程序必须捕获，并提供异常处理逻辑，如IO异常/网络连接异常</li>
-<li>不要把异常用于流程控制，会导致代码不易维护，同时影响性能</li>
-<li>不要用try块包裹大代码块，会影响jvm代码优化</li>
-<li>throw early, catch later原则</li>
-</ol>
-<p>Exception和Error都继承自Throwable对象，在Java中只有Throwable对象可以被抛出(throw)和捕捉(catch)，它是异常处理机制的实现基础。</p>
-<p><img src="/images/posts/java-error.png" alt="Throwable类图"></p>
-<h4 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h4><p>Error类javaDoc</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">* An &#123;<span class="meta">@code</span> Error&#125; is a subclass of &#123;<span class="meta">@code</span> Throwable&#125;</span><br><span class="line">* that indicates serious problems that a reasonable application</span><br><span class="line">* should not <span class="keyword">try</span> to <span class="keyword">catch</span>（一个设计合理的应用不应当捕捉的严重问题）. Most such errors are abnormal conditions.</span><br><span class="line">* The &#123;<span class="meta">@code</span> ThreadDeath&#125; error, though a <span class="string">"normal"</span> condition,</span><br><span class="line">* is also a subclass of &#123;<span class="meta">@code</span> Error&#125; because most applications</span><br><span class="line">* should not <span class="keyword">try</span> to <span class="keyword">catch</span> it.</span><br><span class="line">* &lt;p&gt;</span><br><span class="line">* A method is not required to declare in its &#123;<span class="meta">@code</span> <span class="keyword">throws</span>&#125;</span><br><span class="line">* clause any subclasses of &#123;<span class="meta">@code</span> Error&#125; that might be thrown</span><br><span class="line">* during the execution of the method but not caught, since these</span><br><span class="line">* errors are abnormal conditions that should never occur.（方法不应捕捉Error和它的子类，因为这类异常是不应该出现的非正常情况）</span><br><span class="line">*</span><br><span class="line">* That is, &#123;<span class="meta">@code</span> Error&#125; and its subclasses are regarded as unchecked</span><br><span class="line">* exceptions <span class="keyword">for</span> the purposes of compile-time checking of exceptions.</span><br></pre></td></tr></table></figure>
-<p>从以上可以看出，Error指的是极端情况下出现的异常，一般这类异常出现后，JVM已经处于非正常状态，即使捕捉到异常程序也没有办法作出补救，比如上图中的OOMError/StackOverflowError.</p>
-<h4 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* The <span class="class"><span class="keyword">class</span> </span>&#123;<span class="meta">@code</span> Exception&#125; and its subclasses are a form of</span><br><span class="line">* &#123;<span class="meta">@code</span> Throwable&#125; that indicates conditions that a reasonable</span><br><span class="line">* application might want to <span class="keyword">catch</span>.(设计合理的应用也许会捕捉Exception和它的子类)</span><br><span class="line">*</span><br><span class="line">* &lt;p&gt;The <span class="class"><span class="keyword">class</span> </span>&#123;<span class="meta">@code</span> Exception&#125; and any subclasses that are not also</span><br><span class="line">* subclasses of &#123;<span class="meta">@link</span> RuntimeException&#125; are &lt;em&gt;checked</span><br><span class="line">* exceptions&lt;/em&gt;（所有Exception子类，如果不是RuntimeException的子类，都属于CheckedException）.  Checked exceptions need to be declared in a</span><br><span class="line">* method or constructor<span class="string">'s &#123;@code throws&#125; clause if they can be thrown</span></span><br><span class="line"><span class="string">* by the execution of the method or constructor and propagate outside</span></span><br><span class="line"><span class="string">* the method or constructor boundary.（checkedException必须在方法中throws部分显示声明，并向外层调用传递）</span></span><br></pre></td></tr></table></figure>
-<p>Exception是Java允许程序主动捕获/传递的异常。分为CheckedException和UncheckedException两部分。</p>
-<h5 id="UncheckedException"><a href="#UncheckedException" class="headerlink" title="UncheckedException"></a>UncheckedException</h5><p>RuntimeException及其子类均属于UncheckedException，又称为运行时异常。该类异常一般认为可以通过合理编码避免的异常，如NullPointerException/ArrayIndexOutOfBoundsException，这些异常都可以通过一些边界检查代码避免，Java不会在编译期强制要求程序捕捉和处理。</p>
-<h5 id="CheckedException"><a href="#CheckedException" class="headerlink" title="CheckedException"></a>CheckedException</h5><p>CheckedException是必须在程序中显式的捕捉和处理的一类异常。此类异常一般不是可以通过编码规避的，程序必须负责提供异常处理逻辑。如IOException/ConnectionException等外部环境导致的异常。</p>
-<h5 id="异常处理建议"><a href="#异常处理建议" class="headerlink" title="异常处理建议"></a>异常处理建议</h5><p>第一，不要用抛出异常来控制代码流程，由于java实例化一个异常时需要对栈进行快照，这是一个相对比较重的操作。<br>第二，不要用try块包裹一大块代码，尽量哪里抛异常包裹哪里。try块会影响jvm对代码的优化。<br>第三，不要生吞异常，在catch块中把异常忽略掉，不做处理。此类情况往往是基于假设这类异常绝对不会发生。<br>第四，不要捕捉Error，更不要捕捉Throwable，尽量明确捕捉一个特定异常，多个异常多个catch块处理。<br>第五，throw early, catch later原则。有可能抛出异常的代码尽量提早执行。<br>第六，finally块不要处理需要return的对象，否则会影响到try块或catch块中return的对象</p>
-
-
-    
-    
-    
-  </section>
-</article>
-    </div>
-  
     <div class='post-wrapper'>
       <article class="post reveal">
   <section class="meta">
@@ -257,6 +217,7 @@
     </div>
   
 </section>
+
 
 
       </div>

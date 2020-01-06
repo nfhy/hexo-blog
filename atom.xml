@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WALTER`s BLOG</title>
+  
+  <subtitle>双手握住简单的快乐</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2020-01-06T04:10:26.815Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Walter</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java Throwable/Error/Exception</title>
+    <link href="http://yoursite.com/2019/12/26/Throwable-Error-Exception/"/>
+    <id>http://yoursite.com/2019/12/26/Throwable-Error-Exception/</id>
+    <published>2019-12-26T12:33:09.000Z</published>
+    <updated>2020-01-06T04:10:26.815Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Exception-与-Error&quot;&gt;&lt;a href=&quot;#Exception-与-Error&quot; class=&quot;headerlink&quot; title=&quot;Exception 与 Error&quot;&gt;&lt;/a&gt;Exception 与 Error&lt;/h2&gt;&lt;p&gt;总结：&lt;/p&gt;
+&lt;o
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>redis缓存实现</title>
+    <link href="http://yoursite.com/2019/01/06/Throwable-Error-Exception%20copy/"/>
+    <id>http://yoursite.com/2019/01/06/Throwable-Error-Exception%20copy/</id>
+    <published>2019-01-06T03:53:35.000Z</published>
+    <updated>2020-01-06T04:10:26.815Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;设计要求&quot;&gt;&lt;a href=&quot;#设计要求&quot; class=&quot;headerlink&quot; title=&quot;设计要求&quot;&gt;&lt;/a&gt;设计要求&lt;/h2&gt;&lt;p&gt;系统数据字典类数据属于读远大于写的业务数据，在业务层和数据层之间插入缓存层可以极大提高读取速度。但需要解决如下问题：&lt;/p&gt;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>

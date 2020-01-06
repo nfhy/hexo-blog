@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Archives | WALTER`s BLOG</title>
+  <title>redis缓存实现 | WALTER`s BLOG</title>
   <meta name="description" content="可乐+薯片" />
   <meta name="keywords" content="blog,stkevintan,IT,Web Front End,Kevin Tan,kevinsfork" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,13 +12,16 @@
   <link rel="shortcut icon" href="/images/favicon.ico">
   <link rel="alternate" href="/atom.xml" title="WALTER`s BLOG">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="可乐+薯片">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WALTER&#96;s BLOG">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="设计要求系统数据字典类数据属于读远大于写的业务数据，在业务层和数据层之间插入缓存层可以极大提高读取速度。但需要解决如下问题：  数据同步，数据新增&#x2F;删除&#x2F;修改时同步缓存数据 缓存穿透&#x2F;击穿&#x2F;雪崩问题避免 编码方式足够简单，现有redis客户端仅对redis命令进行封装，更上层的封装仍需要自己实现  前期设计思路 前期设计思路，实际编码与思路有差异   实际实现思路 缓存穿透：bloomFilter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis缓存实现">
+<meta property="og:url" content="http://yoursite.com/2019/01/06/Throwable-Error-Exception%20copy/index.html">
 <meta property="og:site_name" content="WALTER&#96;s BLOG">
-<meta property="og:description" content="可乐+薯片">
+<meta property="og:description" content="设计要求系统数据字典类数据属于读远大于写的业务数据，在业务层和数据层之间插入缓存层可以极大提高读取速度。但需要解决如下问题：  数据同步，数据新增&#x2F;删除&#x2F;修改时同步缓存数据 缓存穿透&#x2F;击穿&#x2F;雪崩问题避免 编码方式足够简单，现有redis客户端仅对redis命令进行封装，更上层的封装仍需要自己实现  前期设计思路 前期设计思路，实际编码与思路有差异   实际实现思路 缓存穿透：bloomFilter">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/posts/redis-mindx.png">
+<meta property="article:published_time" content="2019-01-06T03:53:35.000Z">
+<meta property="article:modified_time" content="2020-01-06T04:10:26.815Z">
 <meta property="article:author" content="Walter">
 <meta property="article:tag" content="blog">
 <meta property="article:tag" content="stkevintan">
@@ -27,6 +30,7 @@
 <meta property="article:tag" content="Kevin Tan">
 <meta property="article:tag" content="kevinsfork">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/posts/redis-mindx.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -150,42 +154,81 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        
-  <article id="archive-page" class="post article white-box">
-    <section class='meta'>
-      <h2 class="title">
-        <a href="javascript:void(0)">
-          Archives
-        </a>
-      </h2>
-    </section>
-    <section class="archive">
-      
-            <div class="archive-item archive-year mark">
-              <a id="archive-year-2019" href='/archives/2019/' >
-                2019
-              </a>
-            </div>
-      
-          <div class="archive-item archive-post mark">
-            <a href="/2019/12/26/Throwable-Error-Exception/">
-              <time>12-26</time>
-              <span class="title"><span>java Throwable/Error/Exception</span></span>
-            </a>
-          </div>
-      
-          <div class="archive-item archive-post mark">
-            <a href="/2019/01/06/Throwable-Error-Exception%20copy/">
-              <time>01-06</time>
-              <span class="title"><span>redis缓存实现</span></span>
-            </a>
-          </div>
-      
-    </section>
-  </article>
-  <!--
-  
-    -->
+        <article id="post-Throwable-Error-Exception copy"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2019/01/06/Throwable-Error-Exception%20copy/">
+    	redis缓存实现
+    </a>
+  </h2>
+	<time>
+	  1月 6, 2019
+	</time>
+	
+	</section>
+	
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计要求"><span class="toc-number">1.</span> <span class="toc-text">设计要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前期设计思路"><span class="toc-number">2.</span> <span class="toc-text">前期设计思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实际实现思路"><span class="toc-number">3.</span> <span class="toc-text">实际实现思路</span></a></li></ol></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<h2 id="设计要求"><a href="#设计要求" class="headerlink" title="设计要求"></a>设计要求</h2><p>系统数据字典类数据属于读远大于写的业务数据，在业务层和数据层之间插入缓存层可以极大提高读取速度。但需要解决如下问题：</p>
+<ol>
+<li>数据同步，数据新增/删除/修改时同步缓存数据</li>
+<li>缓存穿透/击穿/雪崩问题避免</li>
+<li>编码方式足够简单，现有redis客户端仅对redis命令进行封装，更上层的封装仍需要自己实现</li>
+</ol>
+<h2 id="前期设计思路"><a href="#前期设计思路" class="headerlink" title="前期设计思路"></a>前期设计思路</h2><blockquote>
+<p>前期设计思路，实际编码与思路有差异</p>
+</blockquote>
+<p><img src="/images/posts/redis-mindx.png" alt="redis脑图"></p>
+<h2 id="实际实现思路"><a href="#实际实现思路" class="headerlink" title="实际实现思路"></a>实际实现思路</h2><ol>
+<li>缓存穿透：bloomFilter + 黑名单</li>
+<li>缓存击穿/缓存雪崩：随机TTL或永不过期（数据字典数据量小，不存在内存不足问题）</li>
+<li>数据字典类型数据：根据数据字典数据结构特点，使用 key:redisHash:&lt;dataKey:data&gt; 方式组织数据</li>
+<li>新增数据：更新bloomFilter，更新黑名单，插入redis</li>
+<li>删除数据：更新bloomFilter，更新黑名单，删除redis</li>
+<li>更新数据：更新redis，更新db</li>
+<li>查询数据：<ol>
+<li>bloomFilter过滤</li>
+<li>黑名单过滤</li>
+<li>缓存查找<ol>
+<li>缓存命中：返回数据</li>
+<li>缓存未命中：查询db<ol>
+<li>db查询到数据时，新增数据逻辑</li>
+<li>db未查询到数据时，删除数据逻辑</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>数据序列化：Kryo protoBuff等速度快，但使用不便，需要注册java对象类型，改用jackson2</li>
+</ol>
+
+  	</div>
+	  
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2019/12/26/Throwable-Error-Exception/" rel="prev"  title="java Throwable/Error/Exception">
+						java Throwable/Error/Exception 
+					</a></span>
+				
+				
+		</div>
+	
+	</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: 'redis缓存实现',
+		tools: true
+	}
+</script>
 
       </div>
       <aside class='l_side'>
