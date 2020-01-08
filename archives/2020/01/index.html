@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>WALTER`s BLOG</title>
+  <title>Archives: 2020/1 | WALTER`s BLOG</title>
   <meta name="description" content="可乐+薯片" />
   <meta name="keywords" content="blog,stkevintan,IT,Web Front End,Kevin Tan,kevinsfork" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,15 +12,13 @@
   <link rel="shortcut icon" href="/images/favicon.ico">
   <link rel="alternate" href="/atom.xml" title="WALTER`s BLOG">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="springboot 集成 springCloudConfig 是否可以脱离euraka实现 如何实现灰度发布，如何实现配置热切换">
+  <meta name="description" content="可乐+薯片">
 <meta property="og:type" content="website">
 <meta property="og:title" content="WALTER&#96;s BLOG">
-<meta property="og:url" content="http://yoursite.com/todoList/index.html">
+<meta property="og:url" content="http://yoursite.com/archives/2020/01/index.html">
 <meta property="og:site_name" content="WALTER&#96;s BLOG">
-<meta property="og:description" content="springboot 集成 springCloudConfig 是否可以脱离euraka实现 如何实现灰度发布，如何实现配置热切换">
+<meta property="og:description" content="可乐+薯片">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-08T08:59:05.712Z">
-<meta property="article:modified_time" content="2020-01-08T08:59:05.712Z">
 <meta property="article:author" content="Walter">
 <meta property="article:tag" content="blog">
 <meta property="article:tag" content="stkevintan">
@@ -152,43 +150,67 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        <article id="page-"
-  class="post white-box article-type-page"
-  itemscope itemprop="blogPost">
-	<section class='meta'>
-	<h2 class="title">
-  	<a href="/todoList/index.html">
-    	
-    </a>
-  </h2>
-	<time>
-	  1月 8, 2020
-	</time>
+        
 	
-	</section>
-	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#springboot-集成-springCloudConfig"><span class="toc-number">1.</span> <span class="toc-text">springboot 集成 springCloudConfig</span></a></li></ol></section>
-	
-	<section class="article typo">
-  	<div class="article-entry" itemprop="articleBody">
-    	<h4 id="springboot-集成-springCloudConfig"><a href="#springboot-集成-springCloudConfig" class="headerlink" title="springboot 集成 springCloudConfig"></a>springboot 集成 springCloudConfig</h4><ol>
-<li>是否可以脱离euraka实现</li>
-<li>如何实现灰度发布，如何实现配置热切换</li>
-</ol>
+  <script>
+    window.subData= { title:'Year : 2020.1'}
+  </script>
 
-  	</div>
-	  
+<section class="post-list">
+	
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
+      <a href="/2020/01/08/front-back-seperate/">
+        front-back-seperate
+      </a>
+    </h2>
+    
+    <time>
+      1月 8, 2020
+    </time>
 		
-	
-	</section>
-	
+  </section>
+  <section class="article typo">
+	  <h3 id="如何做分离"><a href="#如何做分离" class="headerlink" title="如何做分离"></a>如何做分离</h3><h4 id="分离职责"><a href="#分离职责" class="headerlink" title="分离职责"></a>分离职责</h4><p>前后端仅通过异步接口来编程，前后端都各自有自己的开发流程，构建工具，测试集合。</p>
+<p><img src="/images/posts/%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E6%B5%81.jpg" alt="前后端数据流"></p>
+<h4 id="接口规范"><a href="#接口规范" class="headerlink" title="接口规范"></a>接口规范</h4><h5 id="规范原则"><a href="#规范原则" class="headerlink" title="规范原则"></a>规范原则</h5><ul>
+<li>接口返回数据即显示：前端仅做渲染逻辑处理</li>
+<li>渲染逻辑禁止跨多个接口调用</li>
+<li>前端关注交互、渲染逻辑，尽量避免业务逻辑处理的出现</li>
+<li>请求响应传输数据格式：JSON，JSON数据尽量简单轻量，避免多级JSON的出现</li>
+</ul>
+<h4 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h4><h5 id="请求格式"><a href="#请求格式" class="headerlink" title="请求格式"></a>请求格式</h5><p><strong>get</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user/login?body=&#123;"uname":"root","pwd":"root"&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>post</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"uname"</span>:<span class="string">"root"</span>,<span class="attr">"pwd"</span>:<span class="string">"root"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>返回格式</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"code"</span>:<span class="number">200</span>,        <span class="comment">//返回状态码 200成功，其他失败</span></span><br><span class="line">  <span class="attr">"message"</span>:<span class="string">"请求成功"</span>,  <span class="comment">//返回信息描述</span></span><br><span class="line">  <span class="attr">"data"</span>: jsonObj  <span class="comment">//返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="java后端规范"><a href="#java后端规范" class="headerlink" title="java后端规范"></a>java后端规范</h4><ul>
+<li>domain中现有POJO已经满足接口要求的，直接返回POJO</li>
+<li>domain中现有POJO无法满足接口要求的，如返回结果需要组合用户/角色/权限三种POJO，请声明一个新的POJO，以<strong>业务名+Vo</strong>命名，如 <code>UserRolePrivilegeVo</code></li>
+<li>后端新增ResultData，依据返回格式：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AjaxResult</span> <span class="keyword">extends</span> <span class="title">HashMap</span>&lt;<span class="title">String</span>, <span class="title">Object</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String CODE_TAG = <span class="string">"code"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MSG_TAG = <span class="string">"msg"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DATA_TAG = <span class="string">"data"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>后端接口不论业务成功与否，统一返回AjaxResult对象，方便前端做拦截和异常统一提示</li>
+<li>老的前端代码包含业务逻辑，请将这些逻辑迁移到后端实现</li>
+<li>老的前端代码包含参数校验规则，请将这些规则交由前端实现</li>
+</ul>
+
+
+    
+    
+    
+  </section>
 </article>
-<script>
-	window.subData = {
-		title: '',
-		tools: true
-	}
-</script>
+    </div>
+  
+</section>
+
+
 
       </div>
       <aside class='l_side'>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-06T04:10:26.815Z</updated>
+  <updated>2020-01-08T08:59:05.708Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,31 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>front-back-seperate</title>
+    <link href="http://yoursite.com/2020/01/08/front-back-seperate/"/>
+    <id>http://yoursite.com/2020/01/08/front-back-seperate/</id>
+    <published>2020-01-08T08:59:05.708Z</published>
+    <updated>2020-01-08T08:59:05.708Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;如何做分离&quot;&gt;&lt;a href=&quot;#如何做分离&quot; class=&quot;headerlink&quot; title=&quot;如何做分离&quot;&gt;&lt;/a&gt;如何做分离&lt;/h3&gt;&lt;h4 id=&quot;分离职责&quot;&gt;&lt;a href=&quot;#分离职责&quot; class=&quot;headerlink&quot; title=&quot;分离职责&quot;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>java Throwable/Error/Exception</title>
     <link href="http://yoursite.com/2019/12/26/Throwable-Error-Exception/"/>
     <id>http://yoursite.com/2019/12/26/Throwable-Error-Exception/</id>
     <published>2019-12-26T12:33:09.000Z</published>
-    <updated>2020-01-06T04:10:26.815Z</updated>
+    <updated>2020-01-08T08:59:05.708Z</updated>
     
     <summary type="html">
     
@@ -39,10 +59,10 @@
   
   <entry>
     <title>redis缓存实现</title>
-    <link href="http://yoursite.com/2019/01/06/Throwable-Error-Exception%20copy/"/>
-    <id>http://yoursite.com/2019/01/06/Throwable-Error-Exception%20copy/</id>
+    <link href="http://yoursite.com/2019/01/06/redis/"/>
+    <id>http://yoursite.com/2019/01/06/redis/</id>
     <published>2019-01-06T03:53:35.000Z</published>
-    <updated>2020-01-06T04:10:26.815Z</updated>
+    <updated>2020-01-08T08:59:05.708Z</updated>
     
     <summary type="html">
     

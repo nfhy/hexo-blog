@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>front-back-seperate</title>
+      <link href="/2020/01/08/front-back-seperate/"/>
+      <url>/2020/01/08/front-back-seperate/</url>
+      
+        <content type="html"><![CDATA[<h3 id="如何做分离"><a href="#如何做分离" class="headerlink" title="如何做分离"></a>如何做分离</h3><h4 id="分离职责"><a href="#分离职责" class="headerlink" title="分离职责"></a>分离职责</h4><p>前后端仅通过异步接口来编程，前后端都各自有自己的开发流程，构建工具，测试集合。</p><p><img src="/images/posts/%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E6%B5%81.jpg" alt="前后端数据流"></p><h4 id="接口规范"><a href="#接口规范" class="headerlink" title="接口规范"></a>接口规范</h4><h5 id="规范原则"><a href="#规范原则" class="headerlink" title="规范原则"></a>规范原则</h5><ul><li>接口返回数据即显示：前端仅做渲染逻辑处理</li><li>渲染逻辑禁止跨多个接口调用</li><li>前端关注交互、渲染逻辑，尽量避免业务逻辑处理的出现</li><li>请求响应传输数据格式：JSON，JSON数据尽量简单轻量，避免多级JSON的出现</li></ul><h4 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h4><h5 id="请求格式"><a href="#请求格式" class="headerlink" title="请求格式"></a>请求格式</h5><p><strong>get</strong></p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user/login?body=&#123;"uname":"root","pwd":"root"&#125;</span><br></pre></td></tr></table></figure><p><strong>post</strong></p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"uname"</span>:<span class="string">"root"</span>,<span class="attr">"pwd"</span>:<span class="string">"root"</span>&#125;</span><br></pre></td></tr></table></figure><p><strong>返回格式</strong></p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"code"</span>:<span class="number">200</span>,        <span class="comment">//返回状态码 200成功，其他失败</span></span><br><span class="line">  <span class="attr">"message"</span>:<span class="string">"请求成功"</span>,  <span class="comment">//返回信息描述</span></span><br><span class="line">  <span class="attr">"data"</span>: jsonObj  <span class="comment">//返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="java后端规范"><a href="#java后端规范" class="headerlink" title="java后端规范"></a>java后端规范</h4><ul><li>domain中现有POJO已经满足接口要求的，直接返回POJO</li><li>domain中现有POJO无法满足接口要求的，如返回结果需要组合用户/角色/权限三种POJO，请声明一个新的POJO，以<strong>业务名+Vo</strong>命名，如 <code>UserRolePrivilegeVo</code></li><li>后端新增ResultData，依据返回格式：</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AjaxResult</span> <span class="keyword">extends</span> <span class="title">HashMap</span>&lt;<span class="title">String</span>, <span class="title">Object</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String CODE_TAG = <span class="string">"code"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MSG_TAG = <span class="string">"msg"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DATA_TAG = <span class="string">"data"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>后端接口不论业务成功与否，统一返回AjaxResult对象，方便前端做拦截和异常统一提示</li><li>老的前端代码包含业务逻辑，请将这些逻辑迁移到后端实现</li><li>老的前端代码包含参数校验规则，请将这些规则交由前端实现</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>java Throwable/Error/Exception</title>
       <link href="/2019/12/26/Throwable-Error-Exception/"/>
       <url>/2019/12/26/Throwable-Error-Exception/</url>
@@ -18,8 +31,8 @@
     
     <entry>
       <title>redis缓存实现</title>
-      <link href="/2019/01/06/Throwable-Error-Exception%20copy/"/>
-      <url>/2019/01/06/Throwable-Error-Exception%20copy/</url>
+      <link href="/2019/01/06/redis/"/>
+      <url>/2019/01/06/redis/</url>
       
         <content type="html"><![CDATA[<h2 id="设计要求"><a href="#设计要求" class="headerlink" title="设计要求"></a>设计要求</h2><p>系统数据字典类数据属于读远大于写的业务数据，在业务层和数据层之间插入缓存层可以极大提高读取速度。但需要解决如下问题：</p><ol><li>数据同步，数据新增/删除/修改时同步缓存数据</li><li>缓存穿透/击穿/雪崩问题避免</li><li>编码方式足够简单，现有redis客户端仅对redis命令进行封装，更上层的封装仍需要自己实现</li></ol><h2 id="前期设计思路"><a href="#前期设计思路" class="headerlink" title="前期设计思路"></a>前期设计思路</h2><blockquote><p>前期设计思路，实际编码与思路有差异</p></blockquote><p><img src="/images/posts/redis-mindx.png" alt="redis脑图"></p><h2 id="实际实现思路"><a href="#实际实现思路" class="headerlink" title="实际实现思路"></a>实际实现思路</h2><ol><li>缓存穿透：bloomFilter + 黑名单</li><li>缓存击穿/缓存雪崩：随机TTL或永不过期（数据字典数据量小，不存在内存不足问题）</li><li>数据字典类型数据：根据数据字典数据结构特点，使用 key:redisHash:&lt;dataKey:data&gt; 方式组织数据</li><li>新增数据：更新bloomFilter，更新黑名单，插入redis</li><li>删除数据：更新bloomFilter，更新黑名单，删除redis</li><li>更新数据：更新redis，更新db</li><li>查询数据：<ol><li>bloomFilter过滤</li><li>黑名单过滤</li><li>缓存查找<ol><li>缓存命中：返回数据</li><li>缓存未命中：查询db<ol><li>db查询到数据时，新增数据逻辑</li><li>db未查询到数据时，删除数据逻辑</li></ol></li></ol></li></ol></li><li>数据序列化：Kryo protoBuff等速度快，但使用不便，需要注册java对象类型，改用jackson2</li></ol>]]></content>
       
